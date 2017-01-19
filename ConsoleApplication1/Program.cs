@@ -12,7 +12,8 @@ namespace ConsoleApplication1 {
         }
 
         private static string getURL() {
-            return "";
+            //http://forums.xkcd.com/viewtopic.php?f=7&t=101043&start=102040
+            return "http://forums.xkcd.com/viewtopic.php?f=7&t=101043";
         }
 
         private static int getStartPage() {
