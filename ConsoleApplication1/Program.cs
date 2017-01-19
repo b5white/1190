@@ -11,8 +11,13 @@ namespace ConsoleApplication1 {
         static void Main(string[] args) {
             int StartPage = getStartPage();
             string url = getURL();
-            string folder = getURL();
-            readPages(url, StartPage);
+            string folder = getFolder();
+            readPages(url, StartPage, folder);
+        }
+
+        private static string getFolder()
+        {
+            return @"C:\Users\Karen\Documents\xkcd\Time\Thread"
         }
 
         private static void readPages(string url, int startPage, string folder) {
