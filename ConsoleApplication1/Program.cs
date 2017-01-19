@@ -28,8 +28,7 @@ namespace ConsoleApplication1 {
             return url + startPage.ToString();
         }
         private static string getURL() {
-            //http://forums.xkcd.com/viewtopic.php?f=7&t=101043&start=102040
-            return "http://forums.xkcd.com/viewtopic.php?f=7&t=101043";
+            return "http://forums.xkcd.com/viewtopic.php?f=7&t=101043&start=";
         }
 
         private static int getStartPage() {
