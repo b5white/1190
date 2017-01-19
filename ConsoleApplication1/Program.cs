@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -25,6 +26,11 @@ namespace ConsoleApplication1 {
                 writePage(stream, xml);
             }
             stream.Close();
+        }
+
+        private static void writePage(StreamWriter stream, string xml)
+        {
+            stream.Write(xml);
         }
 
         private static bool readPage(string url, out string xml ) {
