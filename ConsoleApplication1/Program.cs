@@ -18,13 +18,13 @@ namespace ConsoleApplication1 {
 
         private static string getFolder()
         {
-            return @"C:\Users\Karen\Documents\xkcd\Time\Thread"
+            return @"C:\Users\Karen\Documents\xkcd\Time\Thread";
         }
 
         private static void readPages(string url, int startPage, string folder) {
             Boolean found = true;
             string xml;
-            System.IO.StreamWriter stream = new System.IO.StreamWriter(folder + @"\" + startPage.ToString() + ".html"));
+            System.IO.StreamWriter stream = new System.IO.StreamWriter(folder + @"\" + startPage.ToString() + ".html");
             int stopPage = 25;
             for (int i = startPage; i < stopPage; i++) {
                 found = readPage(buildURL(url, startPage), out xml);
@@ -39,7 +39,8 @@ namespace ConsoleApplication1 {
         }
 
         private static bool readPage(string url, out string xml ) {
-            xml = new WebClient().DownloadString("url");
+            xml = new WebClient().DownloadString(url);
+            return true;
         }
 
         private static string buildURL(string url, int startPage) {
