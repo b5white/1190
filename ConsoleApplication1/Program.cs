@@ -9,6 +9,11 @@ namespace ConsoleApplication1 {
         static void Main(string[] args) {
             int StartPage = getStartPage();
             string url = getURL();
+            readPages(url, StartPage);
+        }
+
+        private static void readPages(string url, int startPage) {
+            
         }
 
         private static string getURL() {
