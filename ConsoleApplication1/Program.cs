@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,10 +24,11 @@ namespace ConsoleApplication1 {
                 found = readPage(buildURL(url, startPage), out xml);
                 writePage(stream, xml);
             }
+            stream.Close();
         }
 
         private static bool readPage(string url, out string xml ) {
-            throw new NotImplementedException();
+            xml = new WebClient().DownloadString("url");
         }
 
         private static string buildURL(string url, int startPage) {
