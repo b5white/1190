@@ -9,6 +9,9 @@ namespace ConsoleApplication1 {
 
     public class Config {
         Dictionary<string, string> values;
+        string file;
+        private bool modified;
+
         public Config() {
             internalConfig(System.Diagnostics.Process.GetCurrentProcess().ProcessName + ".config");
         }
@@ -17,7 +20,15 @@ namespace ConsoleApplication1 {
             internalConfig(path);
         }
 
+        ~Config() {
+            if (modified) {
+                string[] arr = values.Select(kvp => kvp.Key.ToString() + "=" + kvp.Value.ToString()).ToArray();
+                File.WriteAllLines(file, arr);
+            }
+        }
+
         public void internalConfig(string path) {
+            file = path;
             values = File.ReadLines(path)
                 .Where(line => (!String.IsNullOrWhiteSpace(line) && !line.StartsWith("#")))
                 .Select(line => line.Split(new char[] { '=' }, 2, 0))
@@ -29,6 +40,11 @@ namespace ConsoleApplication1 {
                 return values[name];
             }
             return value;
+        }
+
+        public void SetValue(string name, string value) {
+            modified = true;
+            values[name] = value;
         }
     }
 }

@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication1 {
     class Program {
+        static Config config;
 
         static void Main(string[] args) {
-            Config config = new Config();
+            config = new Config();
             int startPage = getStartPage(config);
             string url = getURL(config);
             string folder = getFolder(config);
@@ -21,12 +22,29 @@ namespace ConsoleApplication1 {
         private static void readPages(string url, int startPage, int stopPage, string folder) {
             Boolean found = true;
             string xml;
-            System.IO.StreamWriter stream = new System.IO.StreamWriter(folder + @"\" + startPage.ToString() + ".html");           
-            for (int i = startPage; i < stopPage; i++) {
-                found = readPage(buildURL(url, startPage), out xml);                
-                writePage(stream, xml);
+            int i;
+            int incr = 25;
+            // this still doesn't quite work. 
+            //    if startPage is less than stopPage, say 10 short, then the for loop will run 15 past stopPage.
+            //    I've added he variable "incr" for increment.
+            //    How would you fix this?
+            while (found && startPage <= stopPage) {
+                StreamWriter stream = getStream(startPage, folder);
+                for (i = startPage; i < startPage + incr; i++) {
+                    found = readPage(buildURL(url, startPage), out xml);
+                    if (!found) {
+                        break;
+                    }
+                    writePage(stream, xml);
+                }
+                stream.Close();
+                startPage += i;
+                config.SetValue("startPage", startPage.ToString());
             }
-            stream.Close();
+        }
+
+        private static StreamWriter getStream(int startPage, string folder) {
+            return new StreamWriter(folder + @"\" + startPage.ToString() + ".html");
         }
 
         private static void writePage(StreamWriter stream, string xml)
